@@ -24,11 +24,15 @@
   },
   "homepage": "https://github.com/aldehir/cocoa-discord#readme",
   "dependencies": {
-    "@types/node": "^11.13.6",
-    "typescript": "^3.4.4"
+    "discord.js": "^11.4.2",
+    "erlpack": "^0.1.2",
+    "uws": "^100.0.1",
+    "yargs": "^13.2.2"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
+    "@types/node": "^11.13.6",
+    "@types/yargs": "^13.0.0",
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
     "eslint": "^5.16.0",
@@ -38,6 +42,7 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^24.7.1",
-    "ts-jest": "^24.0.2"
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.4"
   }
 }
