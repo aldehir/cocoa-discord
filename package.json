@@ -20,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/aldehir/cocoa-discord/issues"
   },
-  "homepage": "https://github.com/aldehir/cocoa-discord#readme"
+  "homepage": "https://github.com/aldehir/cocoa-discord#readme",
+  "dependencies": {
+    "@types/node": "^11.13.6",
+    "typescript": "^3.4.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2"
+  }
 }
