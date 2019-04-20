@@ -19,7 +19,8 @@ export default class Cocoa {
   private setup() {
     this.client.on("message", (msg) => {
       if (msg.content == "ping") {
-        logger.info(`Received ping from ${msg.author.username} in ${msg.guild.name}#${msg.channel.id}`)
+        let guildChannel = msg.guild.channels.find((ch) => ch.id === msg.channel.id)
+        logger.info(`Received ping from ${msg.author.username} in ${msg.guild.name}#${guildChannel.name}`)
         msg.reply("pong")
       }
     })
