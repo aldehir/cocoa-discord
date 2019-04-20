@@ -6,8 +6,8 @@ import Parser, { Command, ParserOptions } from './parser'
 type RouteCallback = (command: Command, ...extras: any[]) => void
 
 export default class Router {
-  readonly emitter: EventEmitter
-  readonly parser: Parser
+  private emitter: EventEmitter
+  private parser: Parser
 
   constructor(parserOptions: ParserOptions = {}) {
     this.emitter = new EventEmitter()
