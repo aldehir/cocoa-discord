@@ -4,9 +4,13 @@
   "description": "Discord Bot",
   "main": "src/index.ts",
   "scripts": {
-    "build": "tsc --build tsconfig.json",
+    "build": "tsc -p .",
+    "watch": "tsc -w -p .",
     "lint": "eslint --ext .ts ./src",
     "test": "jest"
+  },
+  "bin": {
+    "cocoa": "./dist/cli.js"
   },
   "repository": {
     "type": "git",
