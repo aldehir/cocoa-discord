@@ -4,6 +4,7 @@
   "description": "Discord Bot",
   "main": "src/index.ts",
   "scripts": {
+    "build": "tsc --build tsconfig.json",
     "test": "jest"
   },
   "repository": {
