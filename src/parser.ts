@@ -13,19 +13,16 @@ export interface Command {
 }
 
 export interface ParserOptions {
-  prefix: string
-}
-
-
-const defaults: ParserOptions = {
-  prefix: '!'
+  prefix?: string
 }
 
 export default class Parser {
-  opts: ParserOptions
+  readonly prefix: string = '!'
 
   constructor(opts: ParserOptions) {
-    this.opts = Object.assign({}, defaults, opts)
+    if (opts.prefix) {
+      this.prefix = opts.prefix
+    }
   }
 
   parse(text: string): Command | null {
@@ -44,11 +41,11 @@ export default class Parser {
   }
 
   private stripPrefixAndSplit(text: string): [string, string] | null {
-    if (!text.startsWith(this.opts.prefix)) {
+    if (!text.startsWith(this.prefix)) {
       return null
     }
 
-    let stripped = text.slice(this.opts.prefix.length)
+    let stripped = text.slice(this.prefix.length)
 
     let match = stripped.match(COMMAND_REGEX)
     if (match === null) {
