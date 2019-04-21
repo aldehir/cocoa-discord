@@ -4,9 +4,17 @@ import logger from './logger'
 import Router from './router'
 import { Command } from './parser'
 
+import Service from './service'
+import TimeService, { GoogleTimeAPI } from './services/time'
+
 interface CocoaConfig {
-  token: string,
+  token: string
+  google: GoogleAPIConfig
   prefix?: string
+}
+
+interface GoogleAPIConfig {
+  apiKey: string
 }
 
 export default class Cocoa {
@@ -15,6 +23,7 @@ export default class Cocoa {
 
   private client: Discord.Client
   private router: Router
+  private services: Service[]
 
   constructor(config: CocoaConfig) {
     this.token = config.token
@@ -22,9 +31,13 @@ export default class Cocoa {
 
     this.client = new Discord.Client()
     this.router = new Router({ prefix: this.prefix })
+    this.services = [
+      new TimeService(new GoogleTimeAPI(config.google.apiKey))
+    ]
 
     this.setupClient()
     this.setupRouter()
+    this.setupServices()
   }
 
   run() {
@@ -38,6 +51,10 @@ export default class Cocoa {
 
   private setupRouter() {
     this.router.route('help', this.onHelp.bind(this))
+  }
+
+  private setupServices() {
+    this.services.forEach(x => x.inject(this.router))
   }
 
   private processMessage(msg: Discord.Message) {

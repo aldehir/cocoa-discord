@@ -6,11 +6,6 @@ import * as fs from 'fs'
 import logger from './logger'
 import Cocoa from './cocoa'
 
-interface Config {
-  token?: string
-}
-
-
 function parseArguments () {
   const parser = yargs
     .alias('h', 'help')
@@ -33,15 +28,23 @@ function parseArguments () {
 const args = parseArguments()
 
 let configContents = fs.readFileSync(args.config as string)
-let config = JSON.parse(configContents.toString('utf8')) as Config
+let config = JSON.parse(configContents.toString('utf8'))
 
 if (config.token === undefined) {
   logger.error("No token in configuration file")
   process.exit(1)
 }
 
+if (!config.services || !config.services.googleAPIKey) {
+  logger.error("No Google API Key found in configuration file")
+  process.exit(1)
+}
+
 let cocoa = new Cocoa({
-  token: config.token as string
+  token: config.token as string,
+  google: {
+    apiKey: config.services.googleAPIKey
+  }
 })
 
 cocoa.run()
